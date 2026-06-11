@@ -23,6 +23,7 @@ export const getConfig = (params: ConfigEnv, configure?: Configure): UserConfig 
                     localsConvention: 'camelCaseOnly',
                 },
             },
+            base: '/ai/',
             plugins: getPlugins(isBuild),
             server: {
                 port: 3000, // 开发环境启动的端口

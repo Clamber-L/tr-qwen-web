@@ -1,5 +1,7 @@
+import RagQuery from './pages/RagQuery';
+
 const App = () => {
-    return <div className="text-2xl text-green-400">app</div>;
+    return <RagQuery />;
 };
 
 export default App;
