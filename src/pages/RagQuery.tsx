@@ -49,7 +49,10 @@ const RagQuery = () => {
         setError('');
         setResult(null);
         try {
-            const data = await ragQuery({ question: question.trim(), imageUrl: imageUrl || undefined });
+            const data = await ragQuery({
+                question: question.trim(),
+                imageUrl: imageUrl || undefined,
+            });
             setResult(data);
         } catch (err) {
             setError(err instanceof Error ? err.message : '请求失败');
