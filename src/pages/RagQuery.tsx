@@ -154,12 +154,46 @@ const RagQuery = () => {
 
                 {result && (
                     <div className="space-y-4">
-                        <div className="bg-white rounded-xl shadow p-5">
-                            <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                                回答
-                            </h2>
-                            <p className="text-gray-800 text-sm leading-relaxed">{result.answer}</p>
-                        </div>
+                        {(() => {
+                            const parts = result.answer.split(/(?=二、整改措施)/);
+                            const issues = parts[0]?.replace(/^一、存在问题\s*/, '').trim();
+                            const measures = parts[1]?.replace(/^二、整改措施\s*/, '').trim();
+                            return (
+                                <>
+                                    {issues && (
+                                        <div className="bg-white rounded-xl shadow p-5">
+                                            <h2 className="text-sm font-semibold text-red-500 mb-3">
+                                                一、存在问题
+                                            </h2>
+
+                                            <p className="text-gray-800 text-sm leading-relaxed whitespace-pre-wrap">
+                                                {issues}
+                                            </p>
+                                        </div>
+                                    )}
+                                    {measures && (
+                                        <div className="bg-white rounded-xl shadow p-5">
+                                            <h2 className="text-sm font-semibold text-green-600 mb-3">
+                                                二、整改措施
+                                            </h2>
+                                            <p className="text-gray-800 text-sm leading-relaxed whitespace-pre-wrap">
+                                                {measures}
+                                            </p>
+                                        </div>
+                                    )}
+                                    {!issues && !measures && (
+                                        <div className="bg-white rounded-xl shadow p-5">
+                                            <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                                                回答
+                                            </h2>
+                                            <p className="text-gray-800 text-sm leading-relaxed whitespace-pre-wrap">
+                                                {result.answer}
+                                            </p>
+                                        </div>
+                                    )}
+                                </>
+                            );
+                        })()}
 
                         {result.sources.length > 0 && (
                             <div className="bg-white rounded-xl shadow p-5">
